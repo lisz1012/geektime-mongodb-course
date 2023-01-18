@@ -32,7 +32,7 @@ public class SparkDemo extends MongoBase {
     public void mock() {
         MongoCollection coll = this.getInputCollection();
 
-        Faker faker = new Faker();
+        Faker faker = new Faker();  // 属性会随机生成
         List<Document> data = new ArrayList<Document>();
         for(int i = 0; i < TOTAL_COUNT; i++) {
             Document user = new Document();
@@ -58,7 +58,7 @@ public class SparkDemo extends MongoBase {
      */
     public void spartCompute() {
         SparkSession spark = SparkSession.builder()
-                .master("local")
+                .master("cluster")
                 .appName("SparkDemo")
                 .config("spark.mongodb.input.uri", this.config.getProperty("input"))
                 .config("spark.mongodb.output.uri", this.config.getProperty("output"))
